@@ -1,11 +1,5 @@
 #!/bin/bash
 
-export INCLUDE=/c/Python38/include:$INCLUDE
-export INCLUDE=/c/Python37/include:$INCLUDE
-export INCLUDE=/c/Python36/include:$INCLUDE
-export INCLUDE=/c/Python35/include:$INCLUDE
-export INCLUDE=/c/Python34/include:$INCLUDE
-
 export PATH=/c/Python38:/c/Python38/Scripts:$PATH
 export PATH=/c/Python37:/c/Python37/Scripts:$PATH
 export PATH=/c/Python36:/c/Python36/Scripts:$PATH
