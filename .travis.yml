@@ -1,20 +1,12 @@
 language: python
 python: 3.7
 
+
 env:
   global:
     - PYPI_REPOSITORY_URL=https://upload.pypi.org/legacy/
     - PYPI_USERNAME=__token__
     - secure: "jfAnPdxjTDw/mFbM2rmqjHaBtGpA+Rr+goCB5/Jp6RZ5N2M60nJliw8B5v7RwZDy//nSIdbTBU7cF/7WjEPwzrHUn5LQsS13ThzoS6KE7NUPa77TOxEpHXr4MJsyeSQMindEbAMeYP+lffI8/ISQ85evIbbSn6XzZSN/YBpQCTUGHWViqKIlpT70GYfRTeEJ0YvXxcJHKXoMuG7N80n8DW88FlfuI2age29cAe80pNn2yCZww2ZH0kG62HGQhzVv4v/uvxLLTaDP/JndYQyBnw6y5gesT2XCrgmCPgCTyVrtJsR96LjOukG2/T5etgpK0sgRwfgRk2DjKmlUqQOUm57lO+52ECaqqbaERFYe/Ub4JZ4DD05lKqm6wtQMD+fYl+TLKzGvCWayuLvxs7HqI+cz0BQQ7iynXuPUqX3xpkUDdAUzg9remmEJ1n8WG/NMHsv3Embh6zHS9RW7OUBXTELjrgJHVwjm8N0KtY063kMDArlSLNcf1gUPOx8MTOXBQWcauxmLfXMyaWrjHQ++1dWRFWjNVkUWfv+l17/ZHJHHnaJ6VpzhrZ5uku4LfEH8hgOCL6EYbO1PVXuEvFXDQX6wIFdbXaXSkx78ZgfiJf3xDqxcU1jl7+ipoCe2xkXaRkka0wg1gwCsfF53suXGIEIMRBWqrGJI9vETu5mVQDY="
-
-
-script:
-  - |
-    if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-      bash travis/build-osx.sh;
-    elif [ "$TRAVIS_OS_NAME" = "windows" ]; then
-      bash travis/build-windows.sh;
-    fi;
 
 
 deploy:
@@ -70,45 +62,53 @@ jobs:
       os: windows
       language: c
       env: PY_VERSION=3.7.4 DEPLOY=1
+      script: bash travis/build-windows.sh
 
     - stage: build
       name: Windows 3.6
       os: windows
       language: c
       env: PY_VERSION=3.6.8 DEPLOY=1
+      script: bash travis/build-windows.sh
 
     - stage: build
       name: Windows 3.5
       os: windows
       language: c
       env: PY_VERSION=3.5.4 DEPLOY=1
+      script: bash travis/build-windows.sh
 
     - stage: build
       name: Windows 3.4
       os: windows
       language: c
       env: PY_VERSION=3.4.4 DEPLOY=1
+      script: bash travis/build-windows.sh
 
     - stage: build
       name: OSX 3.7
       os: osx
       language: generic
       env: PY_VERSION=3.7.4 DEPLOY=1
+      script: bash travis/build-osx.sh
 
     - stage: build
       name: OSX 3.6
       os: osx
       language: generic
       env: PY_VERSION=3.6.8 DEPLOY=1
+      script: bash travis/build-osx.sh
 
     - stage: build
       name: OSX 3.5
       os: osx
       language: generic
       env: PY_VERSION=3.5.4 DEPLOY=1
+      script: bash travis/build-osx.sh
 
     - stage: build
       name: OSX 3.4
       os: osx
       language: generic
       env: PY_VERSION=3.4.4 DEPLOY=1
+      script: bash travis/build-osx.sh
