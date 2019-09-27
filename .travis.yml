@@ -81,12 +81,13 @@ jobs:
       language: c
       install:
         - choco install python --version 3.7.4
-        - pip3 install --upgrade pip
-        - pip3 install -r dev-requirements.txt
         - python --version
-        - pip3 --version
+        - pip install --upgrade pip
+        - pip install -r dev-requirements.txt
+        - pip --version
       script:
-        - pass
+        - python setup.py install
+        - python -m nose cbitstruct
 
     - stage: build
       name: OSX
@@ -99,4 +100,4 @@ jobs:
         - pip3 --version
       script:
         - python3 setup.py install
-        - nosetests cbitstruct
+        - python3 -m nose cbitstruct
