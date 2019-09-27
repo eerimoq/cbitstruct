@@ -1,13 +1,17 @@
-language: python
-python: "3.7"
-
-
 env:
   global:
     - PYPI_REPOSITORY_URL=https://upload.pypi.org/legacy/
     - PYPI_USERNAME=__token__
     - secure: "jfAnPdxjTDw/mFbM2rmqjHaBtGpA+Rr+goCB5/Jp6RZ5N2M60nJliw8B5v7RwZDy//nSIdbTBU7cF/7WjEPwzrHUn5LQsS13ThzoS6KE7NUPa77TOxEpHXr4MJsyeSQMindEbAMeYP+lffI8/ISQ85evIbbSn6XzZSN/YBpQCTUGHWViqKIlpT70GYfRTeEJ0YvXxcJHKXoMuG7N80n8DW88FlfuI2age29cAe80pNn2yCZww2ZH0kG62HGQhzVv4v/uvxLLTaDP/JndYQyBnw6y5gesT2XCrgmCPgCTyVrtJsR96LjOukG2/T5etgpK0sgRwfgRk2DjKmlUqQOUm57lO+52ECaqqbaERFYe/Ub4JZ4DD05lKqm6wtQMD+fYl+TLKzGvCWayuLvxs7HqI+cz0BQQ7iynXuPUqX3xpkUDdAUzg9remmEJ1n8WG/NMHsv3Embh6zHS9RW7OUBXTELjrgJHVwjm8N0KtY063kMDArlSLNcf1gUPOx8MTOXBQWcauxmLfXMyaWrjHQ++1dWRFWjNVkUWfv+l17/ZHJHHnaJ6VpzhrZ5uku4LfEH8hgOCL6EYbO1PVXuEvFXDQX6wIFdbXaXSkx78ZgfiJf3xDqxcU1jl7+ipoCe2xkXaRkka0wg1gwCsfF53suXGIEIMRBWqrGJI9vETu5mVQDY="
+  matrix:
+    - PY_VERSION=3.7.4
+    - PY_VERSION=3.6.8
+    - PY_VERSION=3.5.4
+    - PY_VERSION=3.4.4
 
+os:
+  - windows
+  - osx
 
 deploy:
   provider: script
@@ -16,6 +20,14 @@ deploy:
   on:
     tags: true
     condition: $DEPLOY = 1
+
+
+matrix:
+  include:
+    - os: windows
+      script: travis/build-windows.sh
+      env: DEPLOY=1
+      language: c
 
 
 jobs:
@@ -89,30 +101,44 @@ jobs:
     #     - nosetests cbitstruct
 
     - stage: build
-      name: Windows
+      name: Windows 3.7.4
       os: windows
       language: c
-      env: PATH=/c/Python37:/c/Python37/Scripts:/c/Python36:/c/Python36/Scripts:/c/Python35:/c/Python35/Scripts:/c/Python34:/c/Python34/Scripts:$PATH
-      install:
-        - choco install python --version 3.7.4
-        - python3 --version
-        - pip3 install --upgrade pip
-        - pip3 install -r dev-requirements.txt
-        - pip3 --version
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+           PY_VERSION=3.7.4
+           DEPLOY=1
       script:
-        - |
-          for VERSION in 3.7.4 3.6.8 3.5.4 3.4.4; do
-            choco install python --version $VERSION &&
-            python3 --version &&
-            pip3 install --upgrade pip &&
-            pip3 install -r dev-requirements.txt &&
-            pip3 --version &&
-            python3 setup.py install &&
-            python3 -m nose cbitstruct &&
-            python3 setup.py bdist_wheel &&
-            choco uninstall python;
-          done;
-        - ls dist/
+        - travis/build-windows.sh
+
+    - stage: build
+      name: Windows 3.6.8
+      os: windows
+      language: c
+      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+           PY_VERSION=3.6.8
+           DEPLOY=1
+      script:
+        - travis/build-windows.sh
+
+    - stage: build
+      name: Windows 3.5.4
+      os: windows
+      language: c
+      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
+           PY_VERSION=3.5.4
+           DEPLOY=1
+      script:
+        - travis/build-windows.sh
+
+    - stage: build
+      name: Windows 3.4.4
+      os: windows
+      language: c
+      env: PATH=/c/Python34:/c/Python34/Scripts:$PATH
+           PY_VERSION=3.4.4
+           DEPLOY=1
+      script:
+        - travis/build-windows.sh
 
     - stage: build
       name: OSX
