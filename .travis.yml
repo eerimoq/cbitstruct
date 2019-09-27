@@ -79,15 +79,16 @@ jobs:
       name: Windows
       os: windows
       language: c
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install:
         - choco install python --version 3.7.4
-        - python --version
-        - pip install --upgrade pip
-        - pip install -r dev-requirements.txt
-        - pip --version
+        - python3 --version
+        - pip3 install --upgrade pip
+        - pip3 install -r dev-requirements.txt
+        - pip3 --version
       script:
-        - python setup.py install
-        - python -m nose cbitstruct
+        - python3 setup.py install
+        - python3 -m nose cbitstruct
 
     - stage: build
       name: OSX
