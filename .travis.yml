@@ -47,6 +47,19 @@ jobs:
     #     - docker run --rm -e PLAT=$PLAT -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/travis/build-wheels.sh
     #     - ls wheelhouse/
 
+    - stage: build
+      name: "Source distribution"
+      env: DEPLOY=1
+      install:
+        - pip install -r dev-requirements.txt
+      script:
+        - python setup.py install
+        - nosetests cbitstruct
+        - python setup.py sdist
+        # deploy script uses wheelhouse/
+        - mkdir wheelhouse/
+        - cp dist/* wheelhouse/*
+
     # - stage: build
     #   name: Coverage
     #   env: COVERAGE=1
@@ -70,7 +83,7 @@ jobs:
     #   name: "Forward support"
     #   python: "3.8-dev"
     #   install:
-    #     - pip install bitstruct
+    #     - pip install -r dev-requirements.txt
     #   script:
     #     - python setup.py install
     #     - nosetests cbitstruct
@@ -79,7 +92,12 @@ jobs:
       name: Windows
       os: windows
       language: c
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      env:
+        - PATH=/c/Python37:/c/Python37/Scripts:$PATH
+        - PY_VERSION=3.7.4
+        - PY_VERSION=3.6.8
+        - PY_VERSION=3.5.4
+        - PY_VERSION=3.4.4
       install:
         - choco install python --version 3.7.4
         - python3 --version

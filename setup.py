@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 
 
 extra_compile_args = ["-std=c11"]
@@ -48,7 +48,13 @@ setup(
             "_cbitstruct",
             extra_compile_args=extra_compile_args,
             extra_link_args=extra_link_args,
-            sources=["cbitstruct/_cbitstruct.c"],
+            sources=[
+                "cbitstruct/_cbitstruct.c"],
+            headers=[
+                "cbitstruct/clinic/_cbitstruct.c.35.h",
+                "cbitstruct/clinic/_cbitstruct.c.36.h",
+                "cbitstruct/clinic/_cbitstruct.c.37.h"
+            ]
         )
     ],
     packages=["cbitstruct", "cbitstruct.tests"],
