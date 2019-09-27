@@ -8,9 +8,8 @@ export PATH=/c/Python34:/c/Python34/Scripts:$PATH
 
 choco install python --version $PY_VERSION
 python --version
-python3 --version
 pip3 install --upgrade pip
 pip3 install -r dev-requirements.txt
 pip3 --version
-python3 setup.py install
-python3 -m nose cbitstruct
+python setup.py install
+python -m nose cbitstruct
