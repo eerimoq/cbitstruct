@@ -1,10 +1,16 @@
 #!/usr/bin/env python
 import os
+import sys
 from setuptools import setup, Extension
 
 
-extra_compile_args = ["-std=c11"]
+extra_compile_args = []
 extra_link_args = []
+
+
+if sys.platform != "win32":
+    extra_compile_args += ["-std=c11"]
+
 
 if os.environ.get("COVERAGE"):
     extra_compile_args += ["-g", "-O0", "-fprofile-arcs", "-ftest-coverage"]
