@@ -51,7 +51,8 @@ jobs:
     #   name: Coverage
     #   env: COVERAGE=1
     #   install:
-    #     - pip install cpp-coveralls bitstruct
+    #     - pip install -r dev-requirements.txt
+    #     - pip install cpp-coveralls
     #   script:
     #     - python setup.py install
     #     - nosetests cbitstruct
@@ -60,7 +61,7 @@ jobs:
     # - stage: build
     #   name: Performance
     #   install:
-    #     - pip install bitstruct
+    #     - pip install -r dev-requirements.txt
     #   script:
     #     - python setup.py install
     #     - python cbitstruct/tests/test_perf.py
@@ -79,11 +80,11 @@ jobs:
       os: windows
       language: c
       install:
-        - choco install python3
-        - wget https://bootstrap.pypa.io/get-pip.py
-        - python get-pip.py
+        - choco install python --version 3.7.4
+        - pip3 install --upgrade pip
+        - pip3 install -r dev-requirements.txt
         - python --version
-        - pip --version
+        - pip3 --version
       script:
         - pass
 
@@ -92,7 +93,8 @@ jobs:
       os: osx
       language: generic
       install:
-        - pip3 install pip bitstruct --upgrade
+        - pip3 install --upgrade pip
+        - pip3 install -r dev-requirements.txt
         - python3 --version
         - pip3 --version
       script:
