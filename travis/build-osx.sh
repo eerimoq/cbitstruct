@@ -1,11 +1,16 @@
 #!/bin/bash
 
-export PATH=$PATH:/Users/travis/Library/Python/$PYTHON/bin;
+export PYENV_VERSION=$PY_VERSION
+export PATH="/Users/travis/.pyenv/shims:${PATH}"
 
-yes | sudo port install python$PYTHON;
-yes | sudo port install py$PYTHON-pip;
-sudo port select --set python3 python$PYTHON;
-sudo port select --set pip pip$PYTHON;
+brew update
+brew install openssl readline
+brew outdated pyenv || brew upgrade pyenv
+brew install pyenv-virtualenv
+pyenv install $PY_VERSION
+
+pyenv-virtualenv venv
+source venv/bin/activate
 
 pip3 install --upgrade pip
 pip3 install -r dev-requirements.txt

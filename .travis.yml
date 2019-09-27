@@ -93,22 +93,22 @@ jobs:
       name: OSX 3.7
       os: osx
       language: generic
-      env: PYTHON=37 DEPLOY=1
+      env: PY_VERSION=3.7.4 DEPLOY=1
 
     - stage: build
       name: OSX 3.6
       os: osx
       language: generic
-      env: PYTHON=36 DEPLOY=1
+      env: PY_VERSION=3.6.8 DEPLOY=1
 
     - stage: build
       name: OSX 3.5
       os: osx
       language: generic
-      env: PYTHON=35 DEPLOY=1
+      env: PY_VERSION=3.5.4 DEPLOY=1
 
     - stage: build
       name: OSX 3.4
       os: osx
       language: generic
-      env: PYTHON=34 DEPLOY=1
+      env: PY_VERSION=3.4.4 DEPLOY=1

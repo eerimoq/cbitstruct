@@ -48,13 +48,8 @@ setup(
             "_cbitstruct",
             extra_compile_args=extra_compile_args,
             extra_link_args=extra_link_args,
-            sources=[
-                "cbitstruct/_cbitstruct.c"],
-            headers=[
-                "cbitstruct/clinic/_cbitstruct.c.35.h",
-                "cbitstruct/clinic/_cbitstruct.c.36.h",
-                "cbitstruct/clinic/_cbitstruct.c.37.h"
-            ]
+            sources=["cbitstruct/_cbitstruct.c"],
+            include_dirs=["cbitstruct/"]
         )
     ],
     packages=["cbitstruct", "cbitstruct.tests"],
