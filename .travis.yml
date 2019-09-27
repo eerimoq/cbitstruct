@@ -1,3 +1,5 @@
+language: python
+python: 3.7
 
 env:
   global:
@@ -86,13 +88,37 @@ jobs:
         - python cbitstruct/tests/test_perf.py
 
     - stage: build
-      name: Forward support
+      name: Linux 3.8-dev
       python: 3.8-dev
       install:
         - pip install -r dev-requirements.txt
       script:
         - python setup.py install
         - nosetests cbitstruct
+
+    - stage: build
+      name: Windows 3.7
+      os: windows
+      language: c
+      env: PY_VERSION=3.7.4 DEPLOY=1
+
+    - stage: build
+      name: Windows 3.6
+      os: windows
+      language: c
+      env: PY_VERSION=3.6.8 DEPLOY=1
+
+    - stage: build
+      name: Windows 3.5
+      os: windows
+      language: c
+      env: PY_VERSION=3.5.4 DEPLOY=1
+
+    - stage: build
+      name: Windows 3.4
+      os: windows
+      language: c
+      env: PY_VERSION=3.4.4 DEPLOY=1
 
     - stage: build
       name: OSX 3.7
