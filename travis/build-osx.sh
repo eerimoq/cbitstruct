@@ -3,14 +3,12 @@
 export PYENV_VERSION=$PY_VERSION
 export PATH="/Users/travis/.pyenv/shims:${PATH}"
 
-brew update
 brew install openssl readline
 brew outdated pyenv || brew upgrade pyenv
 brew install pyenv-virtualenv
 pyenv install $PY_VERSION
 
 pyenv-virtualenv venv
-source venv/bin/activate
 
 pip3 install --upgrade pip
 pip3 install -r dev-requirements.txt
