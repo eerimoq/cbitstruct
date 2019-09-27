@@ -8,7 +8,7 @@ export PATH=/c/Python34:/c/Python34/Scripts:$PATH
 
 choco install python --version $PY_VERSION
 python --version
-pip3 install --upgrade pip wheel setuptools
+pip3 install --upgrade pip
 pip3 install -r dev-requirements.txt
 pip3 --version
 python setup.py install
