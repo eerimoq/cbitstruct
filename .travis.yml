@@ -12,7 +12,7 @@ env:
 deploy:
   provider: script
   skip_cleanup: true
-  script: bash travis/deploy.sh
+  script: bash .travis/deploy.sh
   on:
     tags: true
     condition: $DEPLOY = 1
@@ -27,7 +27,7 @@ jobs:
            DEPLOY=1
       services:
         - docker
-      script: bash travis/build-manylinux.sh
+      script: bash .travis/build-manylinux.sh
 
     - stage: build
       name: Manylinux i686
@@ -37,78 +37,78 @@ jobs:
            PRE_CMD=linux32
            PLAT=manylinux1_i686
            DEPLOY=1
-      script: bash travis/build-manylinux.sh
+      script: bash .travis/build-manylinux.sh
 
     - stage: build
       name: Source distribution
       end: DEPLOY=1
-      script: bash travis/build-linux-sdist.sh
+      script: bash .travis/build-linux-sdist.sh
 
     - stage: build
       name: Coverage
-      script: bash travis/coverage.sh
+      script: bash .travis/coverage.sh
 
     - stage: build
       name: Performance
-      script: bash travis/performance.sh
+      script: bash .travis/performance.sh
 
     - stage: build
       name: Linux 3.8-dev
       python: 3.8-dev
-      script: bash travis/build-linux.sh
+      script: bash .travis/build-linux.sh
 
     - stage: build
       name: Windows 3.7
       os: windows
       language: c
       env: PY_VERSION=3.7.4 DEPLOY=1
-      script: bash travis/build-windows.sh
+      script: bash .travis/build-windows.sh
 
     - stage: build
       name: Windows 3.6
       os: windows
       language: c
       env: PY_VERSION=3.6.8 DEPLOY=1
-      script: bash travis/build-windows.sh
+      script: bash .travis/build-windows.sh
 
     - stage: build
       name: Windows 3.5
       os: windows
       language: c
       env: PY_VERSION=3.5.4 DEPLOY=1
-      script: bash travis/build-windows.sh
+      script: bash .travis/build-windows.sh
 
     - stage: build
       name: Windows 3.4
       os: windows
       language: c
       env: PY_VERSION=3.4.4 DEPLOY=1
-      script: bash travis/build-windows.sh
+      script: bash .travis/build-windows.sh
 
     - stage: build
       name: OSX 3.7
       os: osx
       language: generic
       env: PY_VERSION=3.7.4 DEPLOY=1
-      script: bash travis/build-osx.sh
+      script: bash .travis/build-osx.sh
 
     - stage: build
       name: OSX 3.6
       os: osx
       language: generic
       env: PY_VERSION=3.6.8 DEPLOY=1
-      script: bash travis/build-osx.sh
+      script: bash .travis/build-osx.sh
 
     - stage: build
       name: OSX 3.5
       os: osx
       language: generic
       env: PY_VERSION=3.5.4 DEPLOY=1
-      script: bash travis/build-osx.sh
+      script: bash .travis/build-osx.sh
 
     - stage: build
       name: OSX 3.4
       os: osx
       language: generic
       env: PY_VERSION=3.4.4 DEPLOY=1
-      script: bash travis/build-osx.sh
+      script: bash .travis/build-osx.sh
