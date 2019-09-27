@@ -12,4 +12,6 @@ pip3 install --upgrade pip
 pip3 install -r dev-requirements.txt
 pip3 --version
 python setup.py install
+python setup.py bdist_wheel
 python -m nose cbitstruct
+ls dist/
